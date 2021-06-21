@@ -1,38 +1,33 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
+	"runtime"
+	"sync"
 )
 
-type user struct {
-	First string
-	Age   int
-}
-
 func main() {
-	u1 := user{
-		First: "James",
-		Age:   32,
-	}
+	fmt.Println("#CPU", runtime.NumCPU())
+	fmt.Println("#Gr", runtime.NumGoroutine())
+	wg := sync.WaitGroup{}
+	wg.Add(2)
+	fmt.Println("start main")
 
-	u2 := user{
-		First: "Moneypenny",
-		Age:   27,
-	}
+	go func() {
+		fmt.Println("foo")
+		wg.Done()
+	}()
 
-	u3 := user{
-		First: "M",
-		Age:   54,
-	}
+	go func() {
+		fmt.Println("bar")
+		wg.Done()
+	}()
 
-	users := []user{u1, u2, u3}
-
-	fmt.Println(users)
-
-	xb, err := json.Marshal(users)
-	if err !=  nil {
-		fmt.Println(err)
-	}
-	fmt.Println(string(xb))
+	fmt.Println("before wait")
+	fmt.Println("#CPU", runtime.NumCPU())
+	fmt.Println("#Gr", runtime.NumGoroutine())
+	wg.Wait()
+	fmt.Println("end main")
+	fmt.Println("#CPU", runtime.NumCPU())
+	fmt.Println("#Gr", runtime.NumGoroutine())
 }

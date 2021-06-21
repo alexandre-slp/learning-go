@@ -3,25 +3,21 @@ package main
 import (
 	"fmt"
 	"sync"
+	"sync/atomic"
 )
 
 func main() {
-	counter := 0
+	counter := int64(0)
 	goRoutines := 100
-	mutex := sync.Mutex{}
 	wg := sync.WaitGroup{}
 	wg.Add(goRoutines)
 
 	fmt.Println(counter)
 	for i := 0; i < goRoutines; i++ {
 		go func() {
-			mutex.Lock()
-			c := counter
-			c++
-			counter = c
-			fmt.Println(counter)
+			atomic.AddInt64(&counter, 1)
+			fmt.Println(atomic.LoadInt64(&counter))
 			wg.Done()
-			mutex.Unlock()
 		}()
 	}
 	wg.Wait()

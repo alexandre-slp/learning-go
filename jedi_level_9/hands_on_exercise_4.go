@@ -2,24 +2,26 @@ package main
 
 import (
 	"fmt"
-	"runtime"
 	"sync"
 )
 
 func main() {
 	counter := 0
 	goRoutines := 100
+	mutex := sync.Mutex{}
 	wg := sync.WaitGroup{}
 	wg.Add(goRoutines)
+
 	fmt.Println(counter)
 	for i := 0; i < goRoutines; i++ {
 		go func() {
+			mutex.Lock()
 			c := counter
-			runtime.Gosched()
 			c++
 			counter = c
-			wg.Done()
 			fmt.Println(counter)
+			wg.Done()
+			mutex.Unlock()
 		}()
 	}
 	wg.Wait()
