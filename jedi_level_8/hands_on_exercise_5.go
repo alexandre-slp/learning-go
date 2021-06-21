@@ -5,15 +5,74 @@ import (
 	"sort"
 )
 
+type user struct {
+	First   string
+	Last    string
+	Age     int
+	Sayings []string
+}
+type ByAge []user
+
+func (ba ByAge) Len() int           { return len(ba) }
+func (ba ByAge) Swap(i, j int)      { ba[i], ba[j] = ba[j], ba[i] }
+func (ba ByAge) Less(i, j int) bool { return ba[i].Age < ba[j].Age }
+
+type ByLast []user
+
+func (bl ByLast) Len() int           { return len(bl) }
+func (bl ByLast) Swap(i, j int)      { bl[i], bl[j] = bl[j], bl[i] }
+func (bl ByLast) Less(i, j int) bool { return bl[i].Last < bl[j].Last }
+
+func pprint(xu []user) {
+	for _, u := range xu {
+		fmt.Println(u.First, u.Last, u.Age)
+	}
+}
+
 func main() {
-	xi := []int{5, 8, 2, 43, 17, 987, 14, 12, 21, 1, 4, 2, 3, 93, 13}
-	xs := []string{"random", "rainbow", "delights", "in", "torpedo", "summers", "under", "gallantry", "fragmented", "moons", "across", "magenta"}
+	u1 := user{
+		First: "James",
+		Last:  "Bond",
+		Age:   32,
+		Sayings: []string{
+			"Shaken, not stirred",
+			"Youth is no guarantee of innovation",
+			"In his majesty's royal service",
+		},
+	}
 
-	fmt.Println(xi)
-	sort.Ints(xi)
-	fmt.Println(xi)
+	u2 := user{
+		First: "Miss",
+		Last:  "Moneypenny",
+		Age:   27,
+		Sayings: []string{
+			"James, it is soo good to see you",
+			"Would you like me to take care of that for you, James?",
+			"I would really prefer to be a secret agent myself.",
+		},
+	}
 
-	fmt.Println(xs)
-	sort.Strings(xs)
-	fmt.Println(xs)
+	u3 := user{
+		First: "M",
+		Last:  "Hmmmm",
+		Age:   54,
+		Sayings: []string{
+			"Oh, James. You didn't.",
+			"Dear God, what has James done now?",
+			"Can someone please tell me where James Bond is?",
+		},
+	}
+
+	users := []user{u1, u2, u3}
+
+	fmt.Println(users)
+
+	fmt.Println("By age:")
+	sort.Sort(ByAge(users))
+	pprint(users)
+	fmt.Println("--")
+
+	fmt.Println("By last:")
+	sort.Sort(ByLast(users))
+	pprint(users)
 }
