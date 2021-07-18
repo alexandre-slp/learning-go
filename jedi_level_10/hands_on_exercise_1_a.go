@@ -4,6 +4,8 @@ import (
 	"fmt"
 )
 
+//var c = make(chan int)
+
 func main() {
 	c := make(chan int)
 

@@ -14,7 +14,7 @@ func main() {
 	fmt.Println("start main")
 
 	go func() {
-		fmt.Println("foo")
+		fmt.Println("clock")
 		wg.Done()
 	}()
 
