@@ -1,0 +1,47 @@
+{
+  "activities_duplicated_questions_text": [
+    "codeActivity1",
+    "codeActivity2"
+  ],
+  "activities_duplicated_questions_code": [
+    "codeActivity1",
+    "codeActivity2"
+  ],
+  "activities_duplicated_questions_text_quantity": 2,
+  "activities_duplicated_questions_code_quantity": 2,
+  "total_activities": 2,
+  "mapped_activities": 2,
+  "total_questions": 8,
+  "questions_per_activities": 4,
+  "faq_text": [
+    {
+      "text": "T2",
+      "quantity": 4
+    },
+    {
+      "text": "T4",
+      "quantity": 2
+    },
+    {
+      "text": "T1",
+      "quantity": 2
+    }
+  ],
+  "faq_code": [
+    {
+      "code": "3",
+      "quantity": 4
+    },
+    {
+      "code": "1",
+      "quantity": 2
+    },
+    {
+      "code": "2",
+      "quantity": 2
+    }
+  ],
+  "error_while_fetching_activities": null,
+  "address_types": null,
+  "address_point_types": null
+}
